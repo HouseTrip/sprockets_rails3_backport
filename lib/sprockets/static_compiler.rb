@@ -29,6 +29,10 @@ module Sprockets
       File.open("#{@manifest_path}/manifest.yml", 'wb') do |f|
         YAML.dump(manifest, f)
       end
+
+      File.open("#{@manifest_path}/manifest.json", 'wb') do |f|
+        JSON.dump({ assets: manifest }, f)
+      end
     end
 
     def write_asset(asset)
