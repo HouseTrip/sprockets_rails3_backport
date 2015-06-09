@@ -11,14 +11,15 @@ module Rails
           paths
         end
       end
-      
+
       alias_method_chain :paths, :assets
     end
-    
+
     initializer :append_assets_path, :group => :all do |app|
       app.config.assets.paths.unshift(*paths.vendor.assets.paths)
-      app.config.assets.paths.unshift(*paths.lib.assets.paths)
-      app.config.assets.paths.unshift(*paths.app.assets.paths)
+      asset_paths = paths.app.assets.paths.reject { |x| x.to_s.scan(/stylesheets/).size > 0 }
+      asset_paths << Rails.root.join("public", "assets")
+      app.config.assets.paths.unshift(*asset_paths)
     end
   end
 end
