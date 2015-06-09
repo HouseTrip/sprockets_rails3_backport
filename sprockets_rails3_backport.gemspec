@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
 
   s.add_dependency('rails', '~> 3.0.0')
-  s.add_dependency('sprockets', '2.1.2')
+  s.add_dependency('sprockets', '2.1.4')
 
   s.files        = Dir.glob("lib/**/*") + %w(MIT-LICENSE README.markdown)
   s.require_path = 'lib'
