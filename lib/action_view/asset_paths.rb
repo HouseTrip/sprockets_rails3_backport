@@ -104,10 +104,11 @@ module ActionView
           args = [source]
           arity = arity_of(host)
           if arity > 1 && !has_request?
-            invalid_asset_host!("Remove the second argument to your asset_host Proc if you do not need the request.")
+            host.call(source, nil)
+          else
+            args << current_request if (arity > 1 || arity < 0) && has_request?
+            host.call(*args)
           end
-          args << current_request if (arity > 1 || arity < 0) && has_request?
-          host.call(*args)
         else
           (host =~ /%d/) ? host % (Zlib.crc32(source) % 4) : host
         end
