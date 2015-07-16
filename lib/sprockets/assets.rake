@@ -4,9 +4,7 @@ namespace :assets do
   def ruby_rake_task(task)
     env    = ENV['RAILS_ENV'] || 'production'
     groups = ENV['RAILS_GROUPS'] || 'assets'
-    args   = [$0, task,"RAILS_ENV=#{env}","RAILS_GROUPS=#{groups}"]
-    args << "--trace" if Rake.application.options.trace
-    ruby *args
+    system("RAILS_ENV=#{env} RAILS_GROUPS=#{groups} bundle exec rake #{task}")
   end
 
   # We are currently running with no explicit bundler group
