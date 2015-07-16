@@ -4,7 +4,7 @@ namespace :assets do
   def ruby_rake_task(task)
     env    = ENV['RAILS_ENV'] || 'production'
     groups = ENV['RAILS_GROUPS'] || 'assets'
-    system("RAILS_ENV=#{env} RAILS_GROUPS=#{groups} bundle exec rake #{task}")
+    `RAILS3=true RAILS_ENV=#{env} RAILS_GROUPS=#{groups} bundle exec rake #{task}"`
   end
 
   # We are currently running with no explicit bundler group
